@@ -1,10 +1,9 @@
 import { Response,Request, NextFunction } from "express";
 import JWT from 'jsonwebtoken'
-import { AttendeeSchema, VenueSchema } from "../utils/eventsvalidator";
+import { AttendeeSchema, VenueSchema } from "../validator/eventsvalidator";
 import { AttendeeDto, VenueDto } from "../dto/eventsdto";
 import { PrismaClient } from "../generated/prisma";
 import {parse,writeToPath} from 'fast-csv' ;
-import fs from 'fs'
 import path from "path";
 
 const prisma = new PrismaClient();
@@ -17,6 +16,7 @@ interface JWTpayload{
 
 export const LoginVerifyAdmin = async(req:Request , res:Response ,next : NextFunction)=>{
     try{
+        
         const requestLoginToken   = req.headers.authorization
 
         if(!requestLoginToken){
@@ -24,7 +24,6 @@ export const LoginVerifyAdmin = async(req:Request , res:Response ,next : NextFun
         }
         else{const TokenRole : string | undefined  =  requestLoginToken?.split(' ')[1]
         
-
         if(!TokenRole){
             res.status(404).json('No Token found')
         }
@@ -33,8 +32,7 @@ export const LoginVerifyAdmin = async(req:Request , res:Response ,next : NextFun
          if (RoleVerify.Role === "Admin"){
             next();
         }
-        else{res.status(404).json("Only Allowed Admins");
-        }
+        else{res.status(404).json("Only Allowed Admins"); }
     }}
     catch(err:any){
         res.status(500).json("Login Eror")

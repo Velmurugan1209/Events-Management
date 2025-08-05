@@ -23,10 +23,8 @@ async getEventAttendeeCreate (requestEventAttendeCreate : EventAttendeeDto):Prom
 async getEventAttendeeList (requestEventId : number):Promise<any>{
         try{
             const eventid  = requestEventId as number
-            const returnEventAttendeeList  = await prisma.eventattendee.findMany() 
-                const returncount = await prisma.eventattendee.count(
-                    {where:{eventid:eventid }}
-                )  
+            const returnEventAttendeeList  = await prisma.eventattendee.findMany({include:{event:true , attendee:true}}) 
+                const returncount = await prisma.eventattendee.count( )  
                return {returnEventAttendeeList, returncount};
              }
         catch(err:any){

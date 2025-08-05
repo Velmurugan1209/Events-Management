@@ -6,4 +6,4 @@ import { LoginverifyUser } from "../middleware/eventsmiddleware";
 export const AttendeeRoute = Router();
 
 AttendeeRoute.post('/Register' ,RegisterAttendeeVerify,AttendeeCreate)
-AttendeeRoute.get("/" , csvExport, AttendeeList)
+AttendeeRoute.get("/CSV" , csvExport, AttendeeList)

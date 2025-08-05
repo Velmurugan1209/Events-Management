@@ -1,4 +1,4 @@
-import { EventAttendeeSchema, EventSchema } from "../utils/eventsvalidator"
+import { EventAttendeeSchema, EventSchema } from "../validator/eventsvalidator"
 import { Request,Response } from "express"
 import { Eventattendee } from "../service/eventattendeeservice"
 const eventattendee = new Eventattendee();

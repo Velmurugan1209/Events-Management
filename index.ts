@@ -1,7 +1,7 @@
 import express from 'express';
-import {AttendeeRoute} from './routes/attendeeroute'
-import {EventAttendeeRoute} from './routes/eventattendeeroute'
-import {router} from './routes/eventroute'
+import {AttendeeRoute} from './routes/attendeeroute';
+import {EventAttendeeRoute} from './routes/eventattendeeroute';
+import {router} from './routes/eventroute';
 import { VenueRoute } from './routes/venueroute';
 
 const app = express();
@@ -16,8 +16,6 @@ app.use('/Events', EventAttendeeRoute)
 
 app.use('/Events' , VenueRoute)
 
-
 app.listen(3000 , ()=>{
-    console.log("Server Is Runniung....");
-    
+    console.log("Server Is Runniung....");    
 })

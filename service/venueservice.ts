@@ -1,6 +1,5 @@
 import { VenueDto } from "../dto/eventsdto";
 import { PrismaClient} from "../generated/prisma";
-
 const prisma = new PrismaClient();
 export class Venueservice {
     async venueCreate(requestVenueCreate : VenueDto):Promise<VenueDto>{
@@ -10,8 +9,7 @@ export class Venueservice {
                 data:{id,address,capacity,venuename},   
             })
             if(!returnVenueCreate){
-                throw new Error("No Venue Created");
-                
+                throw new Error("No Venue Created");    
             }
             return returnVenueCreate ;
         }
@@ -33,9 +31,9 @@ export class Venueservice {
             return returnVenueUpdate ;
         }
          catch(err:any){
-            throw new Error(err.message);
-            
+            throw new Error(err.message);        
          }
-
     }
 }
+
+

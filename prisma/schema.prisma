@@ -35,14 +35,12 @@ model Event {
   venue       Venue    @relation(fields: [venueid], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  // Attendee Attendee []
+
   Eventattendee Eventattendee[]
 }
 
 model Attendee {
   id          Int      @id @default(autoincrement())
-  // eventsid Int 
-  // Event Event @relation(fields: [eventsid],references: [id])
   name        String
   email       String
   registerdAt DateTime @default(now())
@@ -60,6 +58,7 @@ model Venue {
 }
 
 model Eventattendee {
+
   id Int @id @default(autoincrement())
 
   eventid Int
@@ -70,5 +69,5 @@ model Eventattendee {
 
   registeredAt DateTime @default(now())
 
-  @@unique([eventid , attendeeid])
+  @@unique([eventid , attendeeid]) //composite key
 }

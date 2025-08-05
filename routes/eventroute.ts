@@ -11,6 +11,6 @@ router.get('/Login' , IPLogin)
 
 
 router.post('/Events',  LoginVerifyAdmin ,eventCreate)
-router.put('/Events/:id' ,LoginVerifyAdmin, eventUpdate)
-router.delete('/Events/:id',LoginVerifyAdmin , eventDestroy)
-router.get('/Events/:eventsid',LoginVerifyAdmin, eventattendeeList)
+router.put('/Events/:id' , LoginVerifyAdmin, eventUpdate)
+router.delete('/Events/:id', LoginVerifyAdmin , eventDestroy)
+router.get('/Events', LoginVerifyAdmin, eventattendeeList)

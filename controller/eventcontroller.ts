@@ -1,4 +1,4 @@
-import { EventSchema } from "../utils/eventsvalidator";
+import { EventSchema } from "../validator/eventsvalidator";
 import { Eventservice } from "../service/eventservice";
 import { Response,Request } from "express";
 
@@ -42,6 +42,7 @@ export const eventDestroy = async(req:Request,res:Response)=>{
         res.status(500).json(err.message)
     }
 }
+
 export const eventattendeeList = async(req:Request,res:Response)=>{
     try{
         const requesteventattendeeList = Number(req.params.eventsid)
@@ -53,6 +54,8 @@ export const eventattendeeList = async(req:Request,res:Response)=>{
         
     }
 }
+
+
 
 
 

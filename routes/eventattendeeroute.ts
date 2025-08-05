@@ -5,4 +5,4 @@ import { eventAttendeeCreate, eventAttendeeList } from "../controller/eventatten
 export const EventAttendeeRoute = Router();
 
 EventAttendeeRoute.post('/EV' , eventAttendeeCreate)
-EventAttendeeRoute.get('/EV/:eventid' , eventAttendeeList)
+EventAttendeeRoute.get('/getEV' , eventAttendeeList)

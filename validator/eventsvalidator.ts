@@ -1,12 +1,10 @@
-import {any, date, string, z} from 'zod';
-
+import { z} from 'zod';
 
 export const IPSchema = z.object({
     name : z.string().nonempty(),
-    password : z.string().nonempty(),
-    
-  
+    password : z.string().nonempty(), 
 })
+
 export const IPRegisterschema = z.object({
    name : z.string().nonempty(),
     password : z.string().nonempty(),
@@ -18,7 +16,7 @@ export const EventSchema = z.object({
     description : z.string().optional(),
     data:  z.preprocess((val) => {
   if (typeof val === 'string') {
-    if (val === "20-07-2025") {
+    if (val === "20-08-2025") {
       const [day, month, year] = val.split("-");
       const formattedDate = new Date(`${year}-${month}-${day}`);
       if (!isNaN(formattedDate.getTime())) {
@@ -26,7 +24,7 @@ export const EventSchema = z.object({
       }
     }
   }
-  throw new Error("Only '20-07-2025' is accepted in DD-MM-YYYY format");
+  throw new Error("Only '20-08-2025' is accepted in DD-MM-YYYY format");
 }, z.date()),
      
     //  data : z.date().minDate()
@@ -53,3 +51,5 @@ export const EventAttendeeSchema = z.object({
     eventid : z.number().nonnegative(),
     attendeeid : z.number().nonnegative()
 })
+
+

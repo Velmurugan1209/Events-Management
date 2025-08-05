@@ -1,8 +1,8 @@
 import { EventAttendeeDto, EventDto, IPDto, IPRegister } from "../dto/eventsdto";
-import { PrismaClient, Role } from "../generated/prisma" ;
-import cryptojs from 'crypto-js' ;
-import dotenv from 'dotenv' ;
-import jwt from 'jsonwebtoken' ;
+import { PrismaClient, Role } from "../generated/prisma";
+import cryptojs from 'crypto-js';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 dotenv.config();
 
 const prisma = new PrismaClient();
@@ -69,7 +69,7 @@ export class Eventservice {
     async getEventUpdate(requestEventUpdate : EventDto , id : any):Promise<any>{
         try{
             const {title,description,data,venueid} =  requestEventUpdate as EventDto
-            const returnEventUpdate  = await prisma.event.update({
+            const returnEventUpdate  = await prisma.event.updateMany({
                 where: { id: id },
                 data: {title,description,venueid,data}
             })
@@ -108,7 +108,7 @@ export class Eventservice {
             return returnEventAttendeeList ;
         }
         catch(err:any){
-            throw new Error(err.message);     
+            throw new Error(err.message);
         }
-    }    
+    }     
 }

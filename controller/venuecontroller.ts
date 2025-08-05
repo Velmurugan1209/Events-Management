@@ -1,5 +1,5 @@
 import { VenueDto } from "../dto/eventsdto";
-import { VenueSchema } from "../utils/eventsvalidator";
+import { VenueSchema } from "../validator/eventsvalidator";
 import { Venueservice } from "../service/venueservice";
 import { Response,Request } from "express";
 
