@@ -2,8 +2,8 @@ import { AttendeeDto } from "../dto/eventsdto";
 import { AttendeeSchema } from "../validator/eventsvalidator";
 import { Response,Request } from "express";
 import { Attendee } from "../service/attendeeservice";
-const attendeeservice = new Attendee ();
 
+const attendeeservice = new Attendee ();
 
 export const AttendeeCreate = async(req:Request,res:Response)=>{
     try{
@@ -18,10 +18,12 @@ export const AttendeeCreate = async(req:Request,res:Response)=>{
 
 export const AttendeeList = async(req:Request,res:Response)=>{
     try{
-        const responseAttendeeList : AttendeeDto[] = await attendeeservice.getattendeeList()
-        res.status(200).json({message:"Get All List as CSV File 'Check Your Dirctory",data:[responseAttendeeList]});  
+        const responseAttendeeList : AttendeeDto[] = await attendeeservice.getattendeeList();
+        res.status(200).json({ message : "Get All List as CSV File 'Check Your Dirctory" , data : responseAttendeeList });  
     }
     catch(err:any){
         res.status(500).json(err.message)
     }
 }
+
+

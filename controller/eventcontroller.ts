@@ -2,6 +2,8 @@ import { EventSchema } from "../validator/eventsvalidator";
 import { Eventservice } from "../service/eventservice";
 import { Response,Request } from "express";
 
+
+
 const eventservice = new Eventservice()
 
 
@@ -9,7 +11,7 @@ export const eventCreate = async(req:Request , res:Response)=>{
     try{
         const requestEventCreate = EventSchema.parse(req.body) 
         const responseEventCreate= await eventservice.getEventCreate(requestEventCreate)
-        res.status(200).json("Event Has Created")
+        res.status(200).json({message:`Event Has Created. If you need Invite Other Friends Share This Token : ${responseEventCreate.NewUserToken}`})
         
     }
     catch(err:any){

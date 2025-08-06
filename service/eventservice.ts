@@ -3,6 +3,7 @@ import { PrismaClient, Role } from "../generated/prisma";
 import cryptojs from 'crypto-js';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+
 dotenv.config();
 
 const prisma = new PrismaClient();
@@ -12,7 +13,6 @@ console.log(JWTSecureKey ,HashPasswordSecureKey);
 
 
 export class Eventservice {
-
 
     async getIPCreate(requestAdminCreate : IPRegister):Promise<IPRegister>{
         try{
@@ -59,18 +59,20 @@ export class Eventservice {
               }
     }
 
-    async getEventCreate (requestEventCreate : EventDto):Promise<EventDto>{
+    async getEventCreate (requestEventCreate : EventDto):Promise<any>{
         try{
             const {title,description,data,venueid} = requestEventCreate as EventDto
             const returnEventCreate  : any = await prisma.event.create({data:{title,description,data,venueid}})
             if(!returnEventCreate){
                 throw new Error("No Event Create");
                 }
-            return returnEventCreate ;
+            const NewUserToken = jwt.sign("NewUser",JWTSecureKey,{expiresIn:"1hr"})
+        if(NewUserToken){
+            return{NewUserToken, returnEventCreate} ;
+        }
         }  
         catch(err:any){
-            throw new Error(err.message);
-            
+            throw new Error(err.message);     
         }
     }
 
@@ -118,5 +120,6 @@ export class Eventservice {
         catch(err:any){
             throw new Error(err.message);
         }
-    }     
+    }   
+
 }

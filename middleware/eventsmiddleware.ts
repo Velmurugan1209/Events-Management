@@ -1,7 +1,7 @@
 import { Response,Request, NextFunction } from "express";
 import JWT from 'jsonwebtoken'
 import { AttendeeSchema, VenueSchema } from "../validator/eventsvalidator";
-import { AttendeeDto, VenueDto } from "../dto/eventsdto";
+import { AttendeeDto, IPRegister, VenueDto } from "../dto/eventsdto";
 import { PrismaClient } from "../generated/prisma";
 import {parse,writeToPath} from 'fast-csv' ;
 import path from "path";
@@ -44,7 +44,7 @@ export const LoginVerifyAdmin = async(req:Request , res:Response ,next : NextFun
 
 export const LoginverifyAdminUser = async(req:Request,res:Response,next:NextFunction)=>{
     try{
-         const requestLoginToken   = req.headers.authorization
+         const requestLoginToken   = req.headers.authorization ;
 
         if(!requestLoginToken){
             res.status(404).json("No Headed Found")
@@ -56,7 +56,7 @@ export const LoginverifyAdminUser = async(req:Request,res:Response,next:NextFunc
         }
         const RoleVerify = JWT.verify(TokenRole , JWTSecureKey)
 
-         if (RoleVerify === "User" || "Admin"){
+         if (RoleVerify === "User" || "Admin" || "NewUser"){
                     next();
         }
         else{res.status(404).json("No Allowed");
@@ -72,11 +72,12 @@ export const RegisterAttendeeVerify = async(req:Request,res:Response,next:NextFu
     try{
         const requestAttendeeVerify  = AttendeeSchema.parse(req.body)
         const {id,name,email,registerdAt} = requestAttendeeVerify  as AttendeeDto ;
+        const responseIPverify : any = await prisma.iP.findUnique({where:{name:name}})
         const responseAttendeeVerify : any[] = await prisma.attendee.findMany({where : {email:email},})
-        if(responseAttendeeVerify.length === 0){
+        if(responseAttendeeVerify.length === 0 &&  responseIPverify.name === name){
             next();           
         }
-       else{ throw new Error("Your Already Registerd.  => Enter Another Email");}
+       else{ throw new Error("Your Account Not Registerd. Need To Register First or => Enter Another Email");}
         
     }
     catch(err:any){
@@ -102,7 +103,6 @@ export const RegisterVenueVerify = async (req:Request , res:Response,next:NextFu
 export const csvExport = async(req:Request,res:Response,next:NextFunction)=>{
     try{
         const responseAttendeeListCsv = await prisma.attendee.findMany()
-
         const csvfile = path.join(`./exports/attendeelist ${Date.now()}.csv`)
         const rawdata = JSON.parse(JSON.stringify(responseAttendeeListCsv))
         if(rawdata){
