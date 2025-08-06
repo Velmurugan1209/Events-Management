@@ -1,4 +1,4 @@
-import { EventAttendeeDto, EventDto, IPDto, IPRegister } from "../dto/eventsdto";
+import {EventDto, IPDto, IPRegister } from "../dto/eventsdto";
 import { PrismaClient, Role } from "../generated/prisma";
 import cryptojs from 'crypto-js';
 import dotenv from 'dotenv';
@@ -6,7 +6,9 @@ import jwt from 'jsonwebtoken';
 dotenv.config();
 
 const prisma = new PrismaClient();
-const secureKey : any  = process.env.secureKey
+export const JWTSecureKey : any  = process.env.secureKey
+export const HashPasswordSecureKey :any = process.env.HASHPASSWORDSECUREKEY
+console.log(JWTSecureKey ,HashPasswordSecureKey);
 
 
 export class Eventservice {
@@ -16,9 +18,9 @@ export class Eventservice {
         try{
             const {name,password,role} = requestAdminCreate as IPRegister
 
-            const hashpassword : string  = cryptojs.AES.encrypt(password, secureKey).toString()
+            const hashpassword : string  = cryptojs.AES.encrypt(password, HashPasswordSecureKey).toString()
             
-              const returnAdminCreate = await prisma.iP.create({data:{name:name,password:hashpassword,role:role as Role}})
+            const returnAdminCreate = await prisma.iP.create({data:{name:name,password:hashpassword,role:role as Role}})
             
             if(!returnAdminCreate){
                 throw new Error("Login Failed");
@@ -29,17 +31,23 @@ export class Eventservice {
         throw new Error(err.message);
         } }
 
-    async getLogin(requestAdminLogin : any):Promise<any>{
+    async getLogin(requestAdminLogin : IPDto):Promise<any>{
         try{
            const {name,password} = requestAdminLogin as IPDto 
-            const returnAdminLogin : any   = await prisma.iP.findUnique({where:{name:name}})
+           const returnAdminLogin : IPRegister | null = await prisma.iP.findUnique({where:{name:name}})
+
              if(!returnAdminLogin){
                 throw new Error("No Admin Found");
                 }   
-            const decode  =  cryptojs.AES.decrypt( returnAdminLogin?.password! , "12345").toString(cryptojs.enc.Utf8) 
-   
-          if(decode === password)  {
-            const LogintToken = jwt.sign( {Role : returnAdminLogin.role!} , "12345" , {expiresIn:'1hr'})
+                
+           const decode  =  cryptojs.AES.decrypt( returnAdminLogin?.password! , HashPasswordSecureKey).toString(cryptojs.enc.Utf8) 
+           
+          if(decode === password && returnAdminLogin.role === "Admin")  {
+            const LogintToken = jwt.sign( {Role : returnAdminLogin.role!} , JWTSecureKey , {expiresIn:'1hr'})
+            return {returnAdminLogin , LogintToken}
+          }
+          else if (decode === password && returnAdminLogin.role === "User"){
+            const LogintToken = jwt.sign( {Role : returnAdminLogin.role!} , JWTSecureKey , {expiresIn:'1hr'})
             return {returnAdminLogin , LogintToken}
           }  
           else{

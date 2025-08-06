@@ -5,9 +5,12 @@ import { AttendeeDto, VenueDto } from "../dto/eventsdto";
 import { PrismaClient } from "../generated/prisma";
 import {parse,writeToPath} from 'fast-csv' ;
 import path from "path";
+import { JWTSecureKey , HashPasswordSecureKey } from "../service/eventservice";
 
 const prisma = new PrismaClient();
-const secureKey : any  = process.env.secureKey
+ 
+console.log();
+
 
 interface JWTpayload{
     Role: string ,
@@ -27,7 +30,7 @@ export const LoginVerifyAdmin = async(req:Request , res:Response ,next : NextFun
         if(!TokenRole){
             res.status(404).json('No Token found')
         }
-        const RoleVerify = JWT.verify(TokenRole , secureKey ) as JWTpayload
+        const RoleVerify = JWT.verify(TokenRole , JWTSecureKey ) as JWTpayload
         
          if (RoleVerify.Role === "Admin"){
             next();
@@ -39,7 +42,7 @@ export const LoginVerifyAdmin = async(req:Request , res:Response ,next : NextFun
     }
 }
 
-export const LoginverifyUser = async(req:Request,res:Response,next:NextFunction)=>{
+export const LoginverifyAdminUser = async(req:Request,res:Response,next:NextFunction)=>{
     try{
          const requestLoginToken   = req.headers.authorization
 
@@ -51,9 +54,9 @@ export const LoginverifyUser = async(req:Request,res:Response,next:NextFunction)
         if(!TokenRole){
             res.status(404).json('No Token found')
         }
-        const RoleVerify = JWT.verify(TokenRole , secureKey )
+        const RoleVerify = JWT.verify(TokenRole , JWTSecureKey)
 
-         if (RoleVerify === "User"){
+         if (RoleVerify === "User" || "Admin"){
                     next();
         }
         else{res.status(404).json("No Allowed");
