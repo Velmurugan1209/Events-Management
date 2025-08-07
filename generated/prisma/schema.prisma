@@ -30,7 +30,7 @@ model Event {
   id          Int      @id @default(autoincrement())
   title       String
   description String?
-  data        DateTime
+  date        DateTime
   venueid     Int
   venue       Venue    @relation(fields: [venueid], references: [id])
   createdAt   DateTime @default(now())
@@ -69,4 +69,21 @@ model Eventattendee {
   registeredAt DateTime @default(now())
 
   @@unique([eventid, attendeeid]) //composite key
+}
+
+model InviteDetails {
+  id   Int    @id @default(autoincrement())
+  from String
+  to   String
+}
+
+enum Status {
+  Accept
+  Reject
+}
+
+model AdminConfirmation {
+  id         Int    @id @default(autoincrement())
+  status     Status
+  acceptedby String
 }

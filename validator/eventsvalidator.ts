@@ -14,7 +14,7 @@ export const IPRegisterschema = z.object({
 export const EventSchema = z.object({
     title :z.string().nonempty(),
     description : z.string().optional(),
-    data:  z.preprocess((val) => {
+    date:  z.preprocess((val) => {
   if (typeof val === 'string') {
     if (val === "20-08-2025") {
       const [day, month, year] = val.split("-");
@@ -30,6 +30,7 @@ export const EventSchema = z.object({
     //  data : z.date().minDate()
 
     venueid : z.number().nonnegative(),  
+    // CreaterEmail : z.string().optional  ()
 })
 
 export const AttendeeSchema = z.object({
@@ -51,5 +52,10 @@ export const EventAttendeeSchema = z.object({
     eventid : z.number().nonnegative(),
     attendeeid : z.number().nonnegative()
 })
+
+export const EventConfirmationSchema = z.object({
+  status : z.string(),
+  AcceptedBy : z.string() 
+}) 
 
 

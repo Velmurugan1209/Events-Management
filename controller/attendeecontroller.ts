@@ -9,7 +9,7 @@ export const AttendeeCreate = async(req:Request,res:Response)=>{
     try{
         const requestAttendeeCreate= AttendeeSchema.parse(req.body)
         const responseAttendeeCreate = await attendeeservice.attendeeCreate(requestAttendeeCreate)
-        res.status(200).json("Event Registerd Successfull")
+        res.status(200).json({message:"Your Registered Successfull"})
     }
     catch(err:any){
         res.status(500).json(err.message)

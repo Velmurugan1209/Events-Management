@@ -38,6 +38,16 @@ export type Venue = $Result.DefaultSelection<Prisma.$VenuePayload>
  * 
  */
 export type Eventattendee = $Result.DefaultSelection<Prisma.$EventattendeePayload>
+/**
+ * Model InviteDetails
+ * 
+ */
+export type InviteDetails = $Result.DefaultSelection<Prisma.$InviteDetailsPayload>
+/**
+ * Model AdminConfirmation
+ * 
+ */
+export type AdminConfirmation = $Result.DefaultSelection<Prisma.$AdminConfirmationPayload>
 
 /**
  * Enums
@@ -50,11 +60,23 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const Status: {
+  Accept: 'Accept',
+  Reject: 'Reject'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type Status = $Enums.Status
+
+export const Status: typeof $Enums.Status
 
 /**
  * ##  Prisma Client ʲˢ
@@ -230,6 +252,26 @@ export class PrismaClient<
     * ```
     */
   get eventattendee(): Prisma.EventattendeeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.inviteDetails`: Exposes CRUD operations for the **InviteDetails** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InviteDetails
+    * const inviteDetails = await prisma.inviteDetails.findMany()
+    * ```
+    */
+  get inviteDetails(): Prisma.InviteDetailsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adminConfirmation`: Exposes CRUD operations for the **AdminConfirmation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdminConfirmations
+    * const adminConfirmations = await prisma.adminConfirmation.findMany()
+    * ```
+    */
+  get adminConfirmation(): Prisma.AdminConfirmationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -674,7 +716,9 @@ export namespace Prisma {
     Event: 'Event',
     Attendee: 'Attendee',
     Venue: 'Venue',
-    Eventattendee: 'Eventattendee'
+    Eventattendee: 'Eventattendee',
+    InviteDetails: 'InviteDetails',
+    AdminConfirmation: 'AdminConfirmation'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -693,7 +737,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "iP" | "event" | "attendee" | "venue" | "eventattendee"
+      modelProps: "iP" | "event" | "attendee" | "venue" | "eventattendee" | "inviteDetails" | "adminConfirmation"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1027,6 +1071,138 @@ export namespace Prisma {
           }
         }
       }
+      InviteDetails: {
+        payload: Prisma.$InviteDetailsPayload<ExtArgs>
+        fields: Prisma.InviteDetailsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InviteDetailsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InviteDetailsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InviteDetailsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InviteDetailsPayload>
+          }
+          findFirst: {
+            args: Prisma.InviteDetailsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InviteDetailsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InviteDetailsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InviteDetailsPayload>
+          }
+          findMany: {
+            args: Prisma.InviteDetailsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InviteDetailsPayload>[]
+          }
+          create: {
+            args: Prisma.InviteDetailsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InviteDetailsPayload>
+          }
+          createMany: {
+            args: Prisma.InviteDetailsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.InviteDetailsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InviteDetailsPayload>
+          }
+          update: {
+            args: Prisma.InviteDetailsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InviteDetailsPayload>
+          }
+          deleteMany: {
+            args: Prisma.InviteDetailsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InviteDetailsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.InviteDetailsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InviteDetailsPayload>
+          }
+          aggregate: {
+            args: Prisma.InviteDetailsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInviteDetails>
+          }
+          groupBy: {
+            args: Prisma.InviteDetailsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InviteDetailsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InviteDetailsCountArgs<ExtArgs>
+            result: $Utils.Optional<InviteDetailsCountAggregateOutputType> | number
+          }
+        }
+      }
+      AdminConfirmation: {
+        payload: Prisma.$AdminConfirmationPayload<ExtArgs>
+        fields: Prisma.AdminConfirmationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdminConfirmationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminConfirmationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdminConfirmationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminConfirmationPayload>
+          }
+          findFirst: {
+            args: Prisma.AdminConfirmationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminConfirmationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdminConfirmationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminConfirmationPayload>
+          }
+          findMany: {
+            args: Prisma.AdminConfirmationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminConfirmationPayload>[]
+          }
+          create: {
+            args: Prisma.AdminConfirmationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminConfirmationPayload>
+          }
+          createMany: {
+            args: Prisma.AdminConfirmationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.AdminConfirmationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminConfirmationPayload>
+          }
+          update: {
+            args: Prisma.AdminConfirmationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminConfirmationPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdminConfirmationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdminConfirmationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AdminConfirmationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminConfirmationPayload>
+          }
+          aggregate: {
+            args: Prisma.AdminConfirmationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdminConfirmation>
+          }
+          groupBy: {
+            args: Prisma.AdminConfirmationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdminConfirmationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdminConfirmationCountArgs<ExtArgs>
+            result: $Utils.Optional<AdminConfirmationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1116,6 +1292,8 @@ export namespace Prisma {
     attendee?: AttendeeOmit
     venue?: VenueOmit
     eventattendee?: EventattendeeOmit
+    inviteDetails?: InviteDetailsOmit
+    adminConfirmation?: AdminConfirmationOmit
   }
 
   /* Types for Logging */
@@ -2233,7 +2411,7 @@ export namespace Prisma {
     id: number | null
     title: string | null
     description: string | null
-    data: Date | null
+    date: Date | null
     venueid: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2243,7 +2421,7 @@ export namespace Prisma {
     id: number | null
     title: string | null
     description: string | null
-    data: Date | null
+    date: Date | null
     venueid: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2253,7 +2431,7 @@ export namespace Prisma {
     id: number
     title: number
     description: number
-    data: number
+    date: number
     venueid: number
     createdAt: number
     updatedAt: number
@@ -2275,7 +2453,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    data?: true
+    date?: true
     venueid?: true
     createdAt?: true
     updatedAt?: true
@@ -2285,7 +2463,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    data?: true
+    date?: true
     venueid?: true
     createdAt?: true
     updatedAt?: true
@@ -2295,7 +2473,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    data?: true
+    date?: true
     venueid?: true
     createdAt?: true
     updatedAt?: true
@@ -2392,7 +2570,7 @@ export namespace Prisma {
     id: number
     title: string
     description: string | null
-    data: Date
+    date: Date
     venueid: number
     createdAt: Date
     updatedAt: Date
@@ -2421,7 +2599,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    data?: boolean
+    date?: boolean
     venueid?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2436,13 +2614,13 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    data?: boolean
+    date?: boolean
     venueid?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "data" | "venueid" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "venueid" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     venue?: boolean | VenueDefaultArgs<ExtArgs>
     Eventattendee?: boolean | Event$EventattendeeArgs<ExtArgs>
@@ -2459,7 +2637,7 @@ export namespace Prisma {
       id: number
       title: string
       description: string | null
-      data: Date
+      date: Date
       venueid: number
       createdAt: Date
       updatedAt: Date
@@ -2837,7 +3015,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Event", 'Int'>
     readonly title: FieldRef<"Event", 'String'>
     readonly description: FieldRef<"Event", 'String'>
-    readonly data: FieldRef<"Event", 'DateTime'>
+    readonly date: FieldRef<"Event", 'DateTime'>
     readonly venueid: FieldRef<"Event", 'Int'>
     readonly createdAt: FieldRef<"Event", 'DateTime'>
     readonly updatedAt: FieldRef<"Event", 'DateTime'>
@@ -6151,6 +6329,1794 @@ export namespace Prisma {
 
 
   /**
+   * Model InviteDetails
+   */
+
+  export type AggregateInviteDetails = {
+    _count: InviteDetailsCountAggregateOutputType | null
+    _avg: InviteDetailsAvgAggregateOutputType | null
+    _sum: InviteDetailsSumAggregateOutputType | null
+    _min: InviteDetailsMinAggregateOutputType | null
+    _max: InviteDetailsMaxAggregateOutputType | null
+  }
+
+  export type InviteDetailsAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type InviteDetailsSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type InviteDetailsMinAggregateOutputType = {
+    id: number | null
+    from: string | null
+    to: string | null
+  }
+
+  export type InviteDetailsMaxAggregateOutputType = {
+    id: number | null
+    from: string | null
+    to: string | null
+  }
+
+  export type InviteDetailsCountAggregateOutputType = {
+    id: number
+    from: number
+    to: number
+    _all: number
+  }
+
+
+  export type InviteDetailsAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type InviteDetailsSumAggregateInputType = {
+    id?: true
+  }
+
+  export type InviteDetailsMinAggregateInputType = {
+    id?: true
+    from?: true
+    to?: true
+  }
+
+  export type InviteDetailsMaxAggregateInputType = {
+    id?: true
+    from?: true
+    to?: true
+  }
+
+  export type InviteDetailsCountAggregateInputType = {
+    id?: true
+    from?: true
+    to?: true
+    _all?: true
+  }
+
+  export type InviteDetailsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InviteDetails to aggregate.
+     */
+    where?: InviteDetailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InviteDetails to fetch.
+     */
+    orderBy?: InviteDetailsOrderByWithRelationInput | InviteDetailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InviteDetailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InviteDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InviteDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InviteDetails
+    **/
+    _count?: true | InviteDetailsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InviteDetailsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InviteDetailsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InviteDetailsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InviteDetailsMaxAggregateInputType
+  }
+
+  export type GetInviteDetailsAggregateType<T extends InviteDetailsAggregateArgs> = {
+        [P in keyof T & keyof AggregateInviteDetails]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInviteDetails[P]>
+      : GetScalarType<T[P], AggregateInviteDetails[P]>
+  }
+
+
+
+
+  export type InviteDetailsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InviteDetailsWhereInput
+    orderBy?: InviteDetailsOrderByWithAggregationInput | InviteDetailsOrderByWithAggregationInput[]
+    by: InviteDetailsScalarFieldEnum[] | InviteDetailsScalarFieldEnum
+    having?: InviteDetailsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InviteDetailsCountAggregateInputType | true
+    _avg?: InviteDetailsAvgAggregateInputType
+    _sum?: InviteDetailsSumAggregateInputType
+    _min?: InviteDetailsMinAggregateInputType
+    _max?: InviteDetailsMaxAggregateInputType
+  }
+
+  export type InviteDetailsGroupByOutputType = {
+    id: number
+    from: string
+    to: string
+    _count: InviteDetailsCountAggregateOutputType | null
+    _avg: InviteDetailsAvgAggregateOutputType | null
+    _sum: InviteDetailsSumAggregateOutputType | null
+    _min: InviteDetailsMinAggregateOutputType | null
+    _max: InviteDetailsMaxAggregateOutputType | null
+  }
+
+  type GetInviteDetailsGroupByPayload<T extends InviteDetailsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InviteDetailsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InviteDetailsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InviteDetailsGroupByOutputType[P]>
+            : GetScalarType<T[P], InviteDetailsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InviteDetailsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    from?: boolean
+    to?: boolean
+  }, ExtArgs["result"]["inviteDetails"]>
+
+
+
+  export type InviteDetailsSelectScalar = {
+    id?: boolean
+    from?: boolean
+    to?: boolean
+  }
+
+  export type InviteDetailsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "from" | "to", ExtArgs["result"]["inviteDetails"]>
+
+  export type $InviteDetailsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InviteDetails"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      from: string
+      to: string
+    }, ExtArgs["result"]["inviteDetails"]>
+    composites: {}
+  }
+
+  type InviteDetailsGetPayload<S extends boolean | null | undefined | InviteDetailsDefaultArgs> = $Result.GetResult<Prisma.$InviteDetailsPayload, S>
+
+  type InviteDetailsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InviteDetailsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InviteDetailsCountAggregateInputType | true
+    }
+
+  export interface InviteDetailsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InviteDetails'], meta: { name: 'InviteDetails' } }
+    /**
+     * Find zero or one InviteDetails that matches the filter.
+     * @param {InviteDetailsFindUniqueArgs} args - Arguments to find a InviteDetails
+     * @example
+     * // Get one InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InviteDetailsFindUniqueArgs>(args: SelectSubset<T, InviteDetailsFindUniqueArgs<ExtArgs>>): Prisma__InviteDetailsClient<$Result.GetResult<Prisma.$InviteDetailsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InviteDetails that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InviteDetailsFindUniqueOrThrowArgs} args - Arguments to find a InviteDetails
+     * @example
+     * // Get one InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InviteDetailsFindUniqueOrThrowArgs>(args: SelectSubset<T, InviteDetailsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InviteDetailsClient<$Result.GetResult<Prisma.$InviteDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InviteDetails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteDetailsFindFirstArgs} args - Arguments to find a InviteDetails
+     * @example
+     * // Get one InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InviteDetailsFindFirstArgs>(args?: SelectSubset<T, InviteDetailsFindFirstArgs<ExtArgs>>): Prisma__InviteDetailsClient<$Result.GetResult<Prisma.$InviteDetailsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InviteDetails that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteDetailsFindFirstOrThrowArgs} args - Arguments to find a InviteDetails
+     * @example
+     * // Get one InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InviteDetailsFindFirstOrThrowArgs>(args?: SelectSubset<T, InviteDetailsFindFirstOrThrowArgs<ExtArgs>>): Prisma__InviteDetailsClient<$Result.GetResult<Prisma.$InviteDetailsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InviteDetails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteDetailsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.findMany()
+     * 
+     * // Get first 10 InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const inviteDetailsWithIdOnly = await prisma.inviteDetails.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InviteDetailsFindManyArgs>(args?: SelectSubset<T, InviteDetailsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InviteDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InviteDetails.
+     * @param {InviteDetailsCreateArgs} args - Arguments to create a InviteDetails.
+     * @example
+     * // Create one InviteDetails
+     * const InviteDetails = await prisma.inviteDetails.create({
+     *   data: {
+     *     // ... data to create a InviteDetails
+     *   }
+     * })
+     * 
+     */
+    create<T extends InviteDetailsCreateArgs>(args: SelectSubset<T, InviteDetailsCreateArgs<ExtArgs>>): Prisma__InviteDetailsClient<$Result.GetResult<Prisma.$InviteDetailsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InviteDetails.
+     * @param {InviteDetailsCreateManyArgs} args - Arguments to create many InviteDetails.
+     * @example
+     * // Create many InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InviteDetailsCreateManyArgs>(args?: SelectSubset<T, InviteDetailsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a InviteDetails.
+     * @param {InviteDetailsDeleteArgs} args - Arguments to delete one InviteDetails.
+     * @example
+     * // Delete one InviteDetails
+     * const InviteDetails = await prisma.inviteDetails.delete({
+     *   where: {
+     *     // ... filter to delete one InviteDetails
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InviteDetailsDeleteArgs>(args: SelectSubset<T, InviteDetailsDeleteArgs<ExtArgs>>): Prisma__InviteDetailsClient<$Result.GetResult<Prisma.$InviteDetailsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InviteDetails.
+     * @param {InviteDetailsUpdateArgs} args - Arguments to update one InviteDetails.
+     * @example
+     * // Update one InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InviteDetailsUpdateArgs>(args: SelectSubset<T, InviteDetailsUpdateArgs<ExtArgs>>): Prisma__InviteDetailsClient<$Result.GetResult<Prisma.$InviteDetailsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InviteDetails.
+     * @param {InviteDetailsDeleteManyArgs} args - Arguments to filter InviteDetails to delete.
+     * @example
+     * // Delete a few InviteDetails
+     * const { count } = await prisma.inviteDetails.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InviteDetailsDeleteManyArgs>(args?: SelectSubset<T, InviteDetailsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InviteDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteDetailsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InviteDetailsUpdateManyArgs>(args: SelectSubset<T, InviteDetailsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one InviteDetails.
+     * @param {InviteDetailsUpsertArgs} args - Arguments to update or create a InviteDetails.
+     * @example
+     * // Update or create a InviteDetails
+     * const inviteDetails = await prisma.inviteDetails.upsert({
+     *   create: {
+     *     // ... data to create a InviteDetails
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InviteDetails we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InviteDetailsUpsertArgs>(args: SelectSubset<T, InviteDetailsUpsertArgs<ExtArgs>>): Prisma__InviteDetailsClient<$Result.GetResult<Prisma.$InviteDetailsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InviteDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteDetailsCountArgs} args - Arguments to filter InviteDetails to count.
+     * @example
+     * // Count the number of InviteDetails
+     * const count = await prisma.inviteDetails.count({
+     *   where: {
+     *     // ... the filter for the InviteDetails we want to count
+     *   }
+     * })
+    **/
+    count<T extends InviteDetailsCountArgs>(
+      args?: Subset<T, InviteDetailsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InviteDetailsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InviteDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteDetailsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InviteDetailsAggregateArgs>(args: Subset<T, InviteDetailsAggregateArgs>): Prisma.PrismaPromise<GetInviteDetailsAggregateType<T>>
+
+    /**
+     * Group by InviteDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteDetailsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InviteDetailsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InviteDetailsGroupByArgs['orderBy'] }
+        : { orderBy?: InviteDetailsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InviteDetailsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInviteDetailsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InviteDetails model
+   */
+  readonly fields: InviteDetailsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InviteDetails.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InviteDetailsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InviteDetails model
+   */
+  interface InviteDetailsFieldRefs {
+    readonly id: FieldRef<"InviteDetails", 'Int'>
+    readonly from: FieldRef<"InviteDetails", 'String'>
+    readonly to: FieldRef<"InviteDetails", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InviteDetails findUnique
+   */
+  export type InviteDetailsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+    /**
+     * Filter, which InviteDetails to fetch.
+     */
+    where: InviteDetailsWhereUniqueInput
+  }
+
+  /**
+   * InviteDetails findUniqueOrThrow
+   */
+  export type InviteDetailsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+    /**
+     * Filter, which InviteDetails to fetch.
+     */
+    where: InviteDetailsWhereUniqueInput
+  }
+
+  /**
+   * InviteDetails findFirst
+   */
+  export type InviteDetailsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+    /**
+     * Filter, which InviteDetails to fetch.
+     */
+    where?: InviteDetailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InviteDetails to fetch.
+     */
+    orderBy?: InviteDetailsOrderByWithRelationInput | InviteDetailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InviteDetails.
+     */
+    cursor?: InviteDetailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InviteDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InviteDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InviteDetails.
+     */
+    distinct?: InviteDetailsScalarFieldEnum | InviteDetailsScalarFieldEnum[]
+  }
+
+  /**
+   * InviteDetails findFirstOrThrow
+   */
+  export type InviteDetailsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+    /**
+     * Filter, which InviteDetails to fetch.
+     */
+    where?: InviteDetailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InviteDetails to fetch.
+     */
+    orderBy?: InviteDetailsOrderByWithRelationInput | InviteDetailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InviteDetails.
+     */
+    cursor?: InviteDetailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InviteDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InviteDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InviteDetails.
+     */
+    distinct?: InviteDetailsScalarFieldEnum | InviteDetailsScalarFieldEnum[]
+  }
+
+  /**
+   * InviteDetails findMany
+   */
+  export type InviteDetailsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+    /**
+     * Filter, which InviteDetails to fetch.
+     */
+    where?: InviteDetailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InviteDetails to fetch.
+     */
+    orderBy?: InviteDetailsOrderByWithRelationInput | InviteDetailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InviteDetails.
+     */
+    cursor?: InviteDetailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InviteDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InviteDetails.
+     */
+    skip?: number
+    distinct?: InviteDetailsScalarFieldEnum | InviteDetailsScalarFieldEnum[]
+  }
+
+  /**
+   * InviteDetails create
+   */
+  export type InviteDetailsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a InviteDetails.
+     */
+    data: XOR<InviteDetailsCreateInput, InviteDetailsUncheckedCreateInput>
+  }
+
+  /**
+   * InviteDetails createMany
+   */
+  export type InviteDetailsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InviteDetails.
+     */
+    data: InviteDetailsCreateManyInput | InviteDetailsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InviteDetails update
+   */
+  export type InviteDetailsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a InviteDetails.
+     */
+    data: XOR<InviteDetailsUpdateInput, InviteDetailsUncheckedUpdateInput>
+    /**
+     * Choose, which InviteDetails to update.
+     */
+    where: InviteDetailsWhereUniqueInput
+  }
+
+  /**
+   * InviteDetails updateMany
+   */
+  export type InviteDetailsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InviteDetails.
+     */
+    data: XOR<InviteDetailsUpdateManyMutationInput, InviteDetailsUncheckedUpdateManyInput>
+    /**
+     * Filter which InviteDetails to update
+     */
+    where?: InviteDetailsWhereInput
+    /**
+     * Limit how many InviteDetails to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InviteDetails upsert
+   */
+  export type InviteDetailsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the InviteDetails to update in case it exists.
+     */
+    where: InviteDetailsWhereUniqueInput
+    /**
+     * In case the InviteDetails found by the `where` argument doesn't exist, create a new InviteDetails with this data.
+     */
+    create: XOR<InviteDetailsCreateInput, InviteDetailsUncheckedCreateInput>
+    /**
+     * In case the InviteDetails was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InviteDetailsUpdateInput, InviteDetailsUncheckedUpdateInput>
+  }
+
+  /**
+   * InviteDetails delete
+   */
+  export type InviteDetailsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+    /**
+     * Filter which InviteDetails to delete.
+     */
+    where: InviteDetailsWhereUniqueInput
+  }
+
+  /**
+   * InviteDetails deleteMany
+   */
+  export type InviteDetailsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InviteDetails to delete
+     */
+    where?: InviteDetailsWhereInput
+    /**
+     * Limit how many InviteDetails to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InviteDetails without action
+   */
+  export type InviteDetailsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InviteDetails
+     */
+    select?: InviteDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InviteDetails
+     */
+    omit?: InviteDetailsOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdminConfirmation
+   */
+
+  export type AggregateAdminConfirmation = {
+    _count: AdminConfirmationCountAggregateOutputType | null
+    _avg: AdminConfirmationAvgAggregateOutputType | null
+    _sum: AdminConfirmationSumAggregateOutputType | null
+    _min: AdminConfirmationMinAggregateOutputType | null
+    _max: AdminConfirmationMaxAggregateOutputType | null
+  }
+
+  export type AdminConfirmationAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AdminConfirmationSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AdminConfirmationMinAggregateOutputType = {
+    id: number | null
+    status: $Enums.Status | null
+    acceptedby: string | null
+  }
+
+  export type AdminConfirmationMaxAggregateOutputType = {
+    id: number | null
+    status: $Enums.Status | null
+    acceptedby: string | null
+  }
+
+  export type AdminConfirmationCountAggregateOutputType = {
+    id: number
+    status: number
+    acceptedby: number
+    _all: number
+  }
+
+
+  export type AdminConfirmationAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AdminConfirmationSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AdminConfirmationMinAggregateInputType = {
+    id?: true
+    status?: true
+    acceptedby?: true
+  }
+
+  export type AdminConfirmationMaxAggregateInputType = {
+    id?: true
+    status?: true
+    acceptedby?: true
+  }
+
+  export type AdminConfirmationCountAggregateInputType = {
+    id?: true
+    status?: true
+    acceptedby?: true
+    _all?: true
+  }
+
+  export type AdminConfirmationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminConfirmation to aggregate.
+     */
+    where?: AdminConfirmationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminConfirmations to fetch.
+     */
+    orderBy?: AdminConfirmationOrderByWithRelationInput | AdminConfirmationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdminConfirmationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminConfirmations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminConfirmations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdminConfirmations
+    **/
+    _count?: true | AdminConfirmationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AdminConfirmationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AdminConfirmationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdminConfirmationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdminConfirmationMaxAggregateInputType
+  }
+
+  export type GetAdminConfirmationAggregateType<T extends AdminConfirmationAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdminConfirmation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdminConfirmation[P]>
+      : GetScalarType<T[P], AggregateAdminConfirmation[P]>
+  }
+
+
+
+
+  export type AdminConfirmationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminConfirmationWhereInput
+    orderBy?: AdminConfirmationOrderByWithAggregationInput | AdminConfirmationOrderByWithAggregationInput[]
+    by: AdminConfirmationScalarFieldEnum[] | AdminConfirmationScalarFieldEnum
+    having?: AdminConfirmationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdminConfirmationCountAggregateInputType | true
+    _avg?: AdminConfirmationAvgAggregateInputType
+    _sum?: AdminConfirmationSumAggregateInputType
+    _min?: AdminConfirmationMinAggregateInputType
+    _max?: AdminConfirmationMaxAggregateInputType
+  }
+
+  export type AdminConfirmationGroupByOutputType = {
+    id: number
+    status: $Enums.Status
+    acceptedby: string
+    _count: AdminConfirmationCountAggregateOutputType | null
+    _avg: AdminConfirmationAvgAggregateOutputType | null
+    _sum: AdminConfirmationSumAggregateOutputType | null
+    _min: AdminConfirmationMinAggregateOutputType | null
+    _max: AdminConfirmationMaxAggregateOutputType | null
+  }
+
+  type GetAdminConfirmationGroupByPayload<T extends AdminConfirmationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdminConfirmationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdminConfirmationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdminConfirmationGroupByOutputType[P]>
+            : GetScalarType<T[P], AdminConfirmationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdminConfirmationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    status?: boolean
+    acceptedby?: boolean
+  }, ExtArgs["result"]["adminConfirmation"]>
+
+
+
+  export type AdminConfirmationSelectScalar = {
+    id?: boolean
+    status?: boolean
+    acceptedby?: boolean
+  }
+
+  export type AdminConfirmationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "status" | "acceptedby", ExtArgs["result"]["adminConfirmation"]>
+
+  export type $AdminConfirmationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdminConfirmation"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      status: $Enums.Status
+      acceptedby: string
+    }, ExtArgs["result"]["adminConfirmation"]>
+    composites: {}
+  }
+
+  type AdminConfirmationGetPayload<S extends boolean | null | undefined | AdminConfirmationDefaultArgs> = $Result.GetResult<Prisma.$AdminConfirmationPayload, S>
+
+  type AdminConfirmationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdminConfirmationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdminConfirmationCountAggregateInputType | true
+    }
+
+  export interface AdminConfirmationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdminConfirmation'], meta: { name: 'AdminConfirmation' } }
+    /**
+     * Find zero or one AdminConfirmation that matches the filter.
+     * @param {AdminConfirmationFindUniqueArgs} args - Arguments to find a AdminConfirmation
+     * @example
+     * // Get one AdminConfirmation
+     * const adminConfirmation = await prisma.adminConfirmation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdminConfirmationFindUniqueArgs>(args: SelectSubset<T, AdminConfirmationFindUniqueArgs<ExtArgs>>): Prisma__AdminConfirmationClient<$Result.GetResult<Prisma.$AdminConfirmationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdminConfirmation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdminConfirmationFindUniqueOrThrowArgs} args - Arguments to find a AdminConfirmation
+     * @example
+     * // Get one AdminConfirmation
+     * const adminConfirmation = await prisma.adminConfirmation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdminConfirmationFindUniqueOrThrowArgs>(args: SelectSubset<T, AdminConfirmationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdminConfirmationClient<$Result.GetResult<Prisma.$AdminConfirmationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminConfirmation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminConfirmationFindFirstArgs} args - Arguments to find a AdminConfirmation
+     * @example
+     * // Get one AdminConfirmation
+     * const adminConfirmation = await prisma.adminConfirmation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdminConfirmationFindFirstArgs>(args?: SelectSubset<T, AdminConfirmationFindFirstArgs<ExtArgs>>): Prisma__AdminConfirmationClient<$Result.GetResult<Prisma.$AdminConfirmationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminConfirmation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminConfirmationFindFirstOrThrowArgs} args - Arguments to find a AdminConfirmation
+     * @example
+     * // Get one AdminConfirmation
+     * const adminConfirmation = await prisma.adminConfirmation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdminConfirmationFindFirstOrThrowArgs>(args?: SelectSubset<T, AdminConfirmationFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdminConfirmationClient<$Result.GetResult<Prisma.$AdminConfirmationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdminConfirmations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminConfirmationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdminConfirmations
+     * const adminConfirmations = await prisma.adminConfirmation.findMany()
+     * 
+     * // Get first 10 AdminConfirmations
+     * const adminConfirmations = await prisma.adminConfirmation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adminConfirmationWithIdOnly = await prisma.adminConfirmation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdminConfirmationFindManyArgs>(args?: SelectSubset<T, AdminConfirmationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminConfirmationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdminConfirmation.
+     * @param {AdminConfirmationCreateArgs} args - Arguments to create a AdminConfirmation.
+     * @example
+     * // Create one AdminConfirmation
+     * const AdminConfirmation = await prisma.adminConfirmation.create({
+     *   data: {
+     *     // ... data to create a AdminConfirmation
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdminConfirmationCreateArgs>(args: SelectSubset<T, AdminConfirmationCreateArgs<ExtArgs>>): Prisma__AdminConfirmationClient<$Result.GetResult<Prisma.$AdminConfirmationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdminConfirmations.
+     * @param {AdminConfirmationCreateManyArgs} args - Arguments to create many AdminConfirmations.
+     * @example
+     * // Create many AdminConfirmations
+     * const adminConfirmation = await prisma.adminConfirmation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdminConfirmationCreateManyArgs>(args?: SelectSubset<T, AdminConfirmationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a AdminConfirmation.
+     * @param {AdminConfirmationDeleteArgs} args - Arguments to delete one AdminConfirmation.
+     * @example
+     * // Delete one AdminConfirmation
+     * const AdminConfirmation = await prisma.adminConfirmation.delete({
+     *   where: {
+     *     // ... filter to delete one AdminConfirmation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdminConfirmationDeleteArgs>(args: SelectSubset<T, AdminConfirmationDeleteArgs<ExtArgs>>): Prisma__AdminConfirmationClient<$Result.GetResult<Prisma.$AdminConfirmationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdminConfirmation.
+     * @param {AdminConfirmationUpdateArgs} args - Arguments to update one AdminConfirmation.
+     * @example
+     * // Update one AdminConfirmation
+     * const adminConfirmation = await prisma.adminConfirmation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdminConfirmationUpdateArgs>(args: SelectSubset<T, AdminConfirmationUpdateArgs<ExtArgs>>): Prisma__AdminConfirmationClient<$Result.GetResult<Prisma.$AdminConfirmationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdminConfirmations.
+     * @param {AdminConfirmationDeleteManyArgs} args - Arguments to filter AdminConfirmations to delete.
+     * @example
+     * // Delete a few AdminConfirmations
+     * const { count } = await prisma.adminConfirmation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdminConfirmationDeleteManyArgs>(args?: SelectSubset<T, AdminConfirmationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminConfirmations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminConfirmationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdminConfirmations
+     * const adminConfirmation = await prisma.adminConfirmation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdminConfirmationUpdateManyArgs>(args: SelectSubset<T, AdminConfirmationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one AdminConfirmation.
+     * @param {AdminConfirmationUpsertArgs} args - Arguments to update or create a AdminConfirmation.
+     * @example
+     * // Update or create a AdminConfirmation
+     * const adminConfirmation = await prisma.adminConfirmation.upsert({
+     *   create: {
+     *     // ... data to create a AdminConfirmation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdminConfirmation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdminConfirmationUpsertArgs>(args: SelectSubset<T, AdminConfirmationUpsertArgs<ExtArgs>>): Prisma__AdminConfirmationClient<$Result.GetResult<Prisma.$AdminConfirmationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdminConfirmations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminConfirmationCountArgs} args - Arguments to filter AdminConfirmations to count.
+     * @example
+     * // Count the number of AdminConfirmations
+     * const count = await prisma.adminConfirmation.count({
+     *   where: {
+     *     // ... the filter for the AdminConfirmations we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdminConfirmationCountArgs>(
+      args?: Subset<T, AdminConfirmationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdminConfirmationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdminConfirmation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminConfirmationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdminConfirmationAggregateArgs>(args: Subset<T, AdminConfirmationAggregateArgs>): Prisma.PrismaPromise<GetAdminConfirmationAggregateType<T>>
+
+    /**
+     * Group by AdminConfirmation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminConfirmationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdminConfirmationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdminConfirmationGroupByArgs['orderBy'] }
+        : { orderBy?: AdminConfirmationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdminConfirmationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdminConfirmationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdminConfirmation model
+   */
+  readonly fields: AdminConfirmationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdminConfirmation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdminConfirmationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdminConfirmation model
+   */
+  interface AdminConfirmationFieldRefs {
+    readonly id: FieldRef<"AdminConfirmation", 'Int'>
+    readonly status: FieldRef<"AdminConfirmation", 'Status'>
+    readonly acceptedby: FieldRef<"AdminConfirmation", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdminConfirmation findUnique
+   */
+  export type AdminConfirmationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminConfirmation to fetch.
+     */
+    where: AdminConfirmationWhereUniqueInput
+  }
+
+  /**
+   * AdminConfirmation findUniqueOrThrow
+   */
+  export type AdminConfirmationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminConfirmation to fetch.
+     */
+    where: AdminConfirmationWhereUniqueInput
+  }
+
+  /**
+   * AdminConfirmation findFirst
+   */
+  export type AdminConfirmationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminConfirmation to fetch.
+     */
+    where?: AdminConfirmationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminConfirmations to fetch.
+     */
+    orderBy?: AdminConfirmationOrderByWithRelationInput | AdminConfirmationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminConfirmations.
+     */
+    cursor?: AdminConfirmationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminConfirmations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminConfirmations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminConfirmations.
+     */
+    distinct?: AdminConfirmationScalarFieldEnum | AdminConfirmationScalarFieldEnum[]
+  }
+
+  /**
+   * AdminConfirmation findFirstOrThrow
+   */
+  export type AdminConfirmationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminConfirmation to fetch.
+     */
+    where?: AdminConfirmationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminConfirmations to fetch.
+     */
+    orderBy?: AdminConfirmationOrderByWithRelationInput | AdminConfirmationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminConfirmations.
+     */
+    cursor?: AdminConfirmationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminConfirmations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminConfirmations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminConfirmations.
+     */
+    distinct?: AdminConfirmationScalarFieldEnum | AdminConfirmationScalarFieldEnum[]
+  }
+
+  /**
+   * AdminConfirmation findMany
+   */
+  export type AdminConfirmationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminConfirmations to fetch.
+     */
+    where?: AdminConfirmationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminConfirmations to fetch.
+     */
+    orderBy?: AdminConfirmationOrderByWithRelationInput | AdminConfirmationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdminConfirmations.
+     */
+    cursor?: AdminConfirmationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminConfirmations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminConfirmations.
+     */
+    skip?: number
+    distinct?: AdminConfirmationScalarFieldEnum | AdminConfirmationScalarFieldEnum[]
+  }
+
+  /**
+   * AdminConfirmation create
+   */
+  export type AdminConfirmationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+    /**
+     * The data needed to create a AdminConfirmation.
+     */
+    data: XOR<AdminConfirmationCreateInput, AdminConfirmationUncheckedCreateInput>
+  }
+
+  /**
+   * AdminConfirmation createMany
+   */
+  export type AdminConfirmationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdminConfirmations.
+     */
+    data: AdminConfirmationCreateManyInput | AdminConfirmationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdminConfirmation update
+   */
+  export type AdminConfirmationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+    /**
+     * The data needed to update a AdminConfirmation.
+     */
+    data: XOR<AdminConfirmationUpdateInput, AdminConfirmationUncheckedUpdateInput>
+    /**
+     * Choose, which AdminConfirmation to update.
+     */
+    where: AdminConfirmationWhereUniqueInput
+  }
+
+  /**
+   * AdminConfirmation updateMany
+   */
+  export type AdminConfirmationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdminConfirmations.
+     */
+    data: XOR<AdminConfirmationUpdateManyMutationInput, AdminConfirmationUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminConfirmations to update
+     */
+    where?: AdminConfirmationWhereInput
+    /**
+     * Limit how many AdminConfirmations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminConfirmation upsert
+   */
+  export type AdminConfirmationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+    /**
+     * The filter to search for the AdminConfirmation to update in case it exists.
+     */
+    where: AdminConfirmationWhereUniqueInput
+    /**
+     * In case the AdminConfirmation found by the `where` argument doesn't exist, create a new AdminConfirmation with this data.
+     */
+    create: XOR<AdminConfirmationCreateInput, AdminConfirmationUncheckedCreateInput>
+    /**
+     * In case the AdminConfirmation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdminConfirmationUpdateInput, AdminConfirmationUncheckedUpdateInput>
+  }
+
+  /**
+   * AdminConfirmation delete
+   */
+  export type AdminConfirmationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+    /**
+     * Filter which AdminConfirmation to delete.
+     */
+    where: AdminConfirmationWhereUniqueInput
+  }
+
+  /**
+   * AdminConfirmation deleteMany
+   */
+  export type AdminConfirmationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminConfirmations to delete
+     */
+    where?: AdminConfirmationWhereInput
+    /**
+     * Limit how many AdminConfirmations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminConfirmation without action
+   */
+  export type AdminConfirmationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminConfirmation
+     */
+    select?: AdminConfirmationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminConfirmation
+     */
+    omit?: AdminConfirmationOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6178,7 +8144,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
-    data: 'data',
+    date: 'date',
     venueid: 'venueid',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -6215,6 +8181,24 @@ export namespace Prisma {
   };
 
   export type EventattendeeScalarFieldEnum = (typeof EventattendeeScalarFieldEnum)[keyof typeof EventattendeeScalarFieldEnum]
+
+
+  export const InviteDetailsScalarFieldEnum: {
+    id: 'id',
+    from: 'from',
+    to: 'to'
+  };
+
+  export type InviteDetailsScalarFieldEnum = (typeof InviteDetailsScalarFieldEnum)[keyof typeof InviteDetailsScalarFieldEnum]
+
+
+  export const AdminConfirmationScalarFieldEnum: {
+    id: 'id',
+    status: 'status',
+    acceptedby: 'acceptedby'
+  };
+
+  export type AdminConfirmationScalarFieldEnum = (typeof AdminConfirmationScalarFieldEnum)[keyof typeof AdminConfirmationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6265,6 +8249,21 @@ export namespace Prisma {
   export type VenueOrderByRelevanceFieldEnum = (typeof VenueOrderByRelevanceFieldEnum)[keyof typeof VenueOrderByRelevanceFieldEnum]
 
 
+  export const InviteDetailsOrderByRelevanceFieldEnum: {
+    from: 'from',
+    to: 'to'
+  };
+
+  export type InviteDetailsOrderByRelevanceFieldEnum = (typeof InviteDetailsOrderByRelevanceFieldEnum)[keyof typeof InviteDetailsOrderByRelevanceFieldEnum]
+
+
+  export const AdminConfirmationOrderByRelevanceFieldEnum: {
+    acceptedby: 'acceptedby'
+  };
+
+  export type AdminConfirmationOrderByRelevanceFieldEnum = (typeof AdminConfirmationOrderByRelevanceFieldEnum)[keyof typeof AdminConfirmationOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -6295,6 +8294,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status'
+   */
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
     
 
 
@@ -6365,7 +8371,7 @@ export namespace Prisma {
     id?: IntFilter<"Event"> | number
     title?: StringFilter<"Event"> | string
     description?: StringNullableFilter<"Event"> | string | null
-    data?: DateTimeFilter<"Event"> | Date | string
+    date?: DateTimeFilter<"Event"> | Date | string
     venueid?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
@@ -6377,7 +8383,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
-    data?: SortOrder
+    date?: SortOrder
     venueid?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6393,7 +8399,7 @@ export namespace Prisma {
     NOT?: EventWhereInput | EventWhereInput[]
     title?: StringFilter<"Event"> | string
     description?: StringNullableFilter<"Event"> | string | null
-    data?: DateTimeFilter<"Event"> | Date | string
+    date?: DateTimeFilter<"Event"> | Date | string
     venueid?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
@@ -6405,7 +8411,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
-    data?: SortOrder
+    date?: SortOrder
     venueid?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6423,7 +8429,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Event"> | number
     title?: StringWithAggregatesFilter<"Event"> | string
     description?: StringNullableWithAggregatesFilter<"Event"> | string | null
-    data?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    date?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     venueid?: IntWithAggregatesFilter<"Event"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
@@ -6591,6 +8597,96 @@ export namespace Prisma {
     registeredAt?: DateTimeWithAggregatesFilter<"Eventattendee"> | Date | string
   }
 
+  export type InviteDetailsWhereInput = {
+    AND?: InviteDetailsWhereInput | InviteDetailsWhereInput[]
+    OR?: InviteDetailsWhereInput[]
+    NOT?: InviteDetailsWhereInput | InviteDetailsWhereInput[]
+    id?: IntFilter<"InviteDetails"> | number
+    from?: StringFilter<"InviteDetails"> | string
+    to?: StringFilter<"InviteDetails"> | string
+  }
+
+  export type InviteDetailsOrderByWithRelationInput = {
+    id?: SortOrder
+    from?: SortOrder
+    to?: SortOrder
+    _relevance?: InviteDetailsOrderByRelevanceInput
+  }
+
+  export type InviteDetailsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: InviteDetailsWhereInput | InviteDetailsWhereInput[]
+    OR?: InviteDetailsWhereInput[]
+    NOT?: InviteDetailsWhereInput | InviteDetailsWhereInput[]
+    from?: StringFilter<"InviteDetails"> | string
+    to?: StringFilter<"InviteDetails"> | string
+  }, "id">
+
+  export type InviteDetailsOrderByWithAggregationInput = {
+    id?: SortOrder
+    from?: SortOrder
+    to?: SortOrder
+    _count?: InviteDetailsCountOrderByAggregateInput
+    _avg?: InviteDetailsAvgOrderByAggregateInput
+    _max?: InviteDetailsMaxOrderByAggregateInput
+    _min?: InviteDetailsMinOrderByAggregateInput
+    _sum?: InviteDetailsSumOrderByAggregateInput
+  }
+
+  export type InviteDetailsScalarWhereWithAggregatesInput = {
+    AND?: InviteDetailsScalarWhereWithAggregatesInput | InviteDetailsScalarWhereWithAggregatesInput[]
+    OR?: InviteDetailsScalarWhereWithAggregatesInput[]
+    NOT?: InviteDetailsScalarWhereWithAggregatesInput | InviteDetailsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"InviteDetails"> | number
+    from?: StringWithAggregatesFilter<"InviteDetails"> | string
+    to?: StringWithAggregatesFilter<"InviteDetails"> | string
+  }
+
+  export type AdminConfirmationWhereInput = {
+    AND?: AdminConfirmationWhereInput | AdminConfirmationWhereInput[]
+    OR?: AdminConfirmationWhereInput[]
+    NOT?: AdminConfirmationWhereInput | AdminConfirmationWhereInput[]
+    id?: IntFilter<"AdminConfirmation"> | number
+    status?: EnumStatusFilter<"AdminConfirmation"> | $Enums.Status
+    acceptedby?: StringFilter<"AdminConfirmation"> | string
+  }
+
+  export type AdminConfirmationOrderByWithRelationInput = {
+    id?: SortOrder
+    status?: SortOrder
+    acceptedby?: SortOrder
+    _relevance?: AdminConfirmationOrderByRelevanceInput
+  }
+
+  export type AdminConfirmationWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: AdminConfirmationWhereInput | AdminConfirmationWhereInput[]
+    OR?: AdminConfirmationWhereInput[]
+    NOT?: AdminConfirmationWhereInput | AdminConfirmationWhereInput[]
+    status?: EnumStatusFilter<"AdminConfirmation"> | $Enums.Status
+    acceptedby?: StringFilter<"AdminConfirmation"> | string
+  }, "id">
+
+  export type AdminConfirmationOrderByWithAggregationInput = {
+    id?: SortOrder
+    status?: SortOrder
+    acceptedby?: SortOrder
+    _count?: AdminConfirmationCountOrderByAggregateInput
+    _avg?: AdminConfirmationAvgOrderByAggregateInput
+    _max?: AdminConfirmationMaxOrderByAggregateInput
+    _min?: AdminConfirmationMinOrderByAggregateInput
+    _sum?: AdminConfirmationSumOrderByAggregateInput
+  }
+
+  export type AdminConfirmationScalarWhereWithAggregatesInput = {
+    AND?: AdminConfirmationScalarWhereWithAggregatesInput | AdminConfirmationScalarWhereWithAggregatesInput[]
+    OR?: AdminConfirmationScalarWhereWithAggregatesInput[]
+    NOT?: AdminConfirmationScalarWhereWithAggregatesInput | AdminConfirmationScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AdminConfirmation"> | number
+    status?: EnumStatusWithAggregatesFilter<"AdminConfirmation"> | $Enums.Status
+    acceptedby?: StringWithAggregatesFilter<"AdminConfirmation"> | string
+  }
+
   export type IPCreateInput = {
     name: string
     password: string
@@ -6640,7 +8736,7 @@ export namespace Prisma {
   export type EventCreateInput = {
     title: string
     description?: string | null
-    data: Date | string
+    date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     venue: VenueCreateNestedOneWithoutEventInput
@@ -6651,7 +8747,7 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
-    data: Date | string
+    date: Date | string
     venueid: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6661,7 +8757,7 @@ export namespace Prisma {
   export type EventUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     venue?: VenueUpdateOneRequiredWithoutEventNestedInput
@@ -6672,7 +8768,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     venueid?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6683,7 +8779,7 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
-    data: Date | string
+    date: Date | string
     venueid: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6692,7 +8788,7 @@ export namespace Prisma {
   export type EventUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6701,7 +8797,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     venueid?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6852,6 +8948,84 @@ export namespace Prisma {
     eventid?: IntFieldUpdateOperationsInput | number
     attendeeid?: IntFieldUpdateOperationsInput | number
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InviteDetailsCreateInput = {
+    from: string
+    to: string
+  }
+
+  export type InviteDetailsUncheckedCreateInput = {
+    id?: number
+    from: string
+    to: string
+  }
+
+  export type InviteDetailsUpdateInput = {
+    from?: StringFieldUpdateOperationsInput | string
+    to?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type InviteDetailsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    from?: StringFieldUpdateOperationsInput | string
+    to?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type InviteDetailsCreateManyInput = {
+    id?: number
+    from: string
+    to: string
+  }
+
+  export type InviteDetailsUpdateManyMutationInput = {
+    from?: StringFieldUpdateOperationsInput | string
+    to?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type InviteDetailsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    from?: StringFieldUpdateOperationsInput | string
+    to?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AdminConfirmationCreateInput = {
+    status: $Enums.Status
+    acceptedby: string
+  }
+
+  export type AdminConfirmationUncheckedCreateInput = {
+    id?: number
+    status: $Enums.Status
+    acceptedby: string
+  }
+
+  export type AdminConfirmationUpdateInput = {
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    acceptedby?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AdminConfirmationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    acceptedby?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AdminConfirmationCreateManyInput = {
+    id?: number
+    status: $Enums.Status
+    acceptedby: string
+  }
+
+  export type AdminConfirmationUpdateManyMutationInput = {
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    acceptedby?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AdminConfirmationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    acceptedby?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -7022,7 +9196,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    data?: SortOrder
+    date?: SortOrder
     venueid?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7037,7 +9211,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    data?: SortOrder
+    date?: SortOrder
     venueid?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7047,7 +9221,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    data?: SortOrder
+    date?: SortOrder
     venueid?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7218,6 +9392,87 @@ export namespace Prisma {
     id?: SortOrder
     eventid?: SortOrder
     attendeeid?: SortOrder
+  }
+
+  export type InviteDetailsOrderByRelevanceInput = {
+    fields: InviteDetailsOrderByRelevanceFieldEnum | InviteDetailsOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type InviteDetailsCountOrderByAggregateInput = {
+    id?: SortOrder
+    from?: SortOrder
+    to?: SortOrder
+  }
+
+  export type InviteDetailsAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type InviteDetailsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    from?: SortOrder
+    to?: SortOrder
+  }
+
+  export type InviteDetailsMinOrderByAggregateInput = {
+    id?: SortOrder
+    from?: SortOrder
+    to?: SortOrder
+  }
+
+  export type InviteDetailsSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
+  export type AdminConfirmationOrderByRelevanceInput = {
+    fields: AdminConfirmationOrderByRelevanceFieldEnum | AdminConfirmationOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type AdminConfirmationCountOrderByAggregateInput = {
+    id?: SortOrder
+    status?: SortOrder
+    acceptedby?: SortOrder
+  }
+
+  export type AdminConfirmationAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AdminConfirmationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    status?: SortOrder
+    acceptedby?: SortOrder
+  }
+
+  export type AdminConfirmationMinOrderByAggregateInput = {
+    id?: SortOrder
+    status?: SortOrder
+    acceptedby?: SortOrder
+  }
+
+  export type AdminConfirmationSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7412,6 +9667,10 @@ export namespace Prisma {
     update?: XOR<XOR<AttendeeUpdateToOneWithWhereWithoutEventattendeeInput, AttendeeUpdateWithoutEventattendeeInput>, AttendeeUncheckedUpdateWithoutEventattendeeInput>
   }
 
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -7569,6 +9828,23 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
+  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
   export type VenueCreateWithoutEventInput = {
     id: number
     venuename: string
@@ -7700,7 +9976,7 @@ export namespace Prisma {
   export type EventCreateWithoutVenueInput = {
     title: string
     description?: string | null
-    data: Date | string
+    date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     Eventattendee?: EventattendeeCreateNestedManyWithoutEventInput
@@ -7710,7 +9986,7 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
-    data: Date | string
+    date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     Eventattendee?: EventattendeeUncheckedCreateNestedManyWithoutEventInput
@@ -7749,7 +10025,7 @@ export namespace Prisma {
     id?: IntFilter<"Event"> | number
     title?: StringFilter<"Event"> | string
     description?: StringNullableFilter<"Event"> | string | null
-    data?: DateTimeFilter<"Event"> | Date | string
+    date?: DateTimeFilter<"Event"> | Date | string
     venueid?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
@@ -7758,7 +10034,7 @@ export namespace Prisma {
   export type EventCreateWithoutEventattendeeInput = {
     title: string
     description?: string | null
-    data: Date | string
+    date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     venue: VenueCreateNestedOneWithoutEventInput
@@ -7768,7 +10044,7 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
-    data: Date | string
+    date: Date | string
     venueid: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7811,7 +10087,7 @@ export namespace Prisma {
   export type EventUpdateWithoutEventattendeeInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     venue?: VenueUpdateOneRequiredWithoutEventNestedInput
@@ -7821,7 +10097,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     venueid?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7901,7 +10177,7 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
-    data: Date | string
+    date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7909,7 +10185,7 @@ export namespace Prisma {
   export type EventUpdateWithoutVenueInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Eventattendee?: EventattendeeUpdateManyWithoutEventNestedInput
@@ -7919,7 +10195,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Eventattendee?: EventattendeeUncheckedUpdateManyWithoutEventNestedInput
@@ -7929,7 +10205,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

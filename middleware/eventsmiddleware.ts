@@ -1,48 +1,90 @@
 import { Response,Request, NextFunction } from "express";
 import JWT from 'jsonwebtoken'
-import { AttendeeSchema, VenueSchema } from "../validator/eventsvalidator";
-import { AttendeeDto, IPRegister, VenueDto } from "../dto/eventsdto";
+import { AttendeeSchema, EventConfirmationSchema, EventSchema, VenueSchema } from "../validator/eventsvalidator";
+import { AdminConformationDto, AttendeeDto, EventCreatedByUserDto, EventDto, IPRegister, VenueDto } from "../dto/eventsdto";
 import { PrismaClient } from "../generated/prisma";
 import {parse,writeToPath} from 'fast-csv' ;
 import path from "path";
 import { JWTSecureKey , HashPasswordSecureKey } from "../service/eventservice";
-
+import nodemailer from 'nodemailer'
+import { error } from "console";
+import { Next } from "mysql2/typings/mysql/lib/parsers/typeCast";
 const prisma = new PrismaClient();
  
-console.log();
-
-
 interface JWTpayload{
     Role: string ,
-
+}
+interface JWTpayloadConfirmation{
+    status : string
 }
 
 export const LoginVerifyAdmin = async(req:Request , res:Response ,next : NextFunction)=>{
     try{
         
         const requestLoginToken   = req.headers.authorization
-
+        
+        const requestUserCreatedEventDetails  = EventSchema.parse(req.body) ;
+        console.log(requestUserCreatedEventDetails);
+        
         if(!requestLoginToken){
             res.status(404).json("No Headed Found")
         }
         else{const TokenRole : string | undefined  =  requestLoginToken?.split(' ')[1]
+       
         
         if(!TokenRole){
-            res.status(404).json('No Token found')
+            res.status(404).json('No Token found You Need To Login Must')
         }
         const RoleVerify = JWT.verify(TokenRole , JWTSecureKey ) as JWTpayload
+        console.log(RoleVerify.Role);
+        
         
          if (RoleVerify.Role === "Admin"){
             next();
         }
-        else{res.status(404).json("Only Allowed Admins"); }
-    }}
+        else if (RoleVerify.Role === "User"){
+            const {title,description,date,venueid,CreaterEmail} = requestUserCreatedEventDetails as unknown as EventCreatedByUserDto
+            const  EventCreatedDetails  :any = {title,description,date,venueid} 
+
+            const connect = nodemailer.createTransport({
+                service : "gmail",
+                auth :{
+                    user : "velupvm1209@gmail.com",
+                    pass : "bjwe zujv llwy izeq"
+                }
+            })
+            const send = await connect.sendMail({
+                to: "velupvm1209@gmail.com",
+                subject: "Confirmation of User Event Create",
+                text: JSON.stringify(EventCreatedDetails)
+            })
+            if(send){
+            res.status(200).json({message:"Sended Event Detail to Admin. should be Waiting for Confimation..."});
+         } } }
+    }
     catch(err:any){
-        res.status(500).json("Login Eror")
+        res.status(500).json({error:err.message})
     }
 }
 
-export const LoginverifyAdminUser = async(req:Request,res:Response,next:NextFunction)=>{
+export const confirmationGmailtoUser = async (req:Request,res:Response,next:NextFunction)=>{
+    try{
+        const requestGmailConfirmationdetails = EventConfirmationSchema.parse(req.body) as AdminConformationDto
+        const {status,AcceptedBy} = requestGmailConfirmationdetails as AdminConformationDto
+        
+        if(status === "Accept"){
+                   next();
+                  } 
+        else if(status === "Reject"){
+               res.status(401).json({message:"Your Request Has Reject Betterluck Nexttime"})
+       }
+     }
+    catch(err:any){
+    res.status(500).json({message:err.message})
+      }
+ }
+
+export const ConfirmationVerifyByAdmin = async(req:Request,res:Response,next:NextFunction)=>{
     try{
          const requestLoginToken   = req.headers.authorization ;
 
@@ -54,30 +96,35 @@ export const LoginverifyAdminUser = async(req:Request,res:Response,next:NextFunc
         if(!TokenRole){
             res.status(404).json('No Token found')
         }
-        const RoleVerify = JWT.verify(TokenRole , JWTSecureKey)
-
-         if (RoleVerify === "User" || "Admin" || "NewUser"){
+        const StatusVerify = JWT.verify(TokenRole , JWTSecureKey) as JWTpayloadConfirmation
+        console.log(StatusVerify);
+        
+         if (StatusVerify.status === "Accept" || "NewUsers"){
                     next();
         }
-        else{res.status(404).json("No Allowed");
+        else{
+            throw new Error("Your Rejected By Admin");     
         }
+        
     }}
     catch(err:any){
-        res.status(500).json("Login Eror")
+        res.status(500).json({message:err.message})
     }
     }
-
 
 export const RegisterAttendeeVerify = async(req:Request,res:Response,next:NextFunction)=>{
     try{
         const requestAttendeeVerify  = AttendeeSchema.parse(req.body)
         const {id,name,email,registerdAt} = requestAttendeeVerify  as AttendeeDto ;
         const responseIPverify : any = await prisma.iP.findUnique({where:{name:name}})
+        if(!responseIPverify){
+            res.status(404).json({message:"You Need To Account Registerd First"})
+        }
         const responseAttendeeVerify : any[] = await prisma.attendee.findMany({where : {email:email},})
-        if(responseAttendeeVerify.length === 0 &&  responseIPverify.name === name){
+        if(responseAttendeeVerify.length === 0){
             next();           
         }
-       else{ throw new Error("Your Account Not Registerd. Need To Register First or => Enter Another Email");}
+       else { res.status(500).json("Enter Another Email Your Already Registered");}
         
     }
     catch(err:any){

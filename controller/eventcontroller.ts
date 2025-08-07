@@ -1,8 +1,6 @@
-import { EventSchema } from "../validator/eventsvalidator";
+import { EventSchema , EventConfirmationSchema} from "../validator/eventsvalidator";
 import { Eventservice } from "../service/eventservice";
 import { Response,Request } from "express";
-
-
 
 const eventservice = new Eventservice()
 
@@ -11,8 +9,29 @@ export const eventCreate = async(req:Request , res:Response)=>{
     try{
         const requestEventCreate = EventSchema.parse(req.body) 
         const responseEventCreate= await eventservice.getEventCreate(requestEventCreate)
-        res.status(200).json({message:`Event Has Created. If you need Invite Other Friends Share This Token : ${responseEventCreate.NewUserToken}`})
+        res.status(200).json({message:`Event Has Created. If you need Invite Other Friends Share This Token : ${responseEventCreate.NewUserToken}`})  
+    }
+    catch(err:any){
+        res.status(500).json(err.message)
+    }
+}
+
+// export const eventCreatedByUsers = async(req:Request,res:Response)=>{
+//     try{
+//         const requestEventCreatedByUser = EventSchema.parse(req.body)
+//         const responseEventCreatedByUser = await eventservice.getEventCreatedByUsers(requestEventCreatedByUser)
+//         res.status(200).json({message:`${responseEventCreatedByUser.returEventCreatedByUser.NewUserToken}You Can Now Share Your Token For Invite Your Friends`})
+//     }
+//     catch(err:any){
+//         res.status(500).json(err.message)
+//     }
+// }
+export const eventConfirmation = async (req:Request,res:Response)=>{
+    try{
+        const requestEventConfirmationStatus = EventConfirmationSchema.parse(req.body)
+        const responseEventConfirmationStatus = await eventservice.getEventConfirmationStatus(requestEventConfirmationStatus)
         
+        res.status(200).json({message:`${responseEventConfirmationStatus.Tokenforconfirmationstatus} Use This Token For will Create Events`})
     }
     catch(err:any){
         res.status(500).json(err.message)

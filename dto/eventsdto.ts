@@ -1,38 +1,59 @@
-import { Role } from "../generated/prisma"
-
 interface EventDto{
-   id? : number ,
-   title : string ,
+   id? : number,
+   title : string,
    description? : string,
-   data : Date ,
-   venueid : number ,
+   date : Date,
+   venueid : number,
    createdAt? : Date,
-   updatedAt? : Date ,
+   updatedAt? : Date,
+}
+
+interface EventCreatedByUserDto{
+    id? : number,
+   title : string,
+   description? : string,
+   date : Date,
+   venueid : number,
+   CreaterEmail : string,
+   createdAt? : Date,
+   updatedAt? : Date,
+}
+
+enum status{
+    Accept,
+    Reject,
+}
+
+interface AdminConformationDto {
+     id? : number,
+    status : string,
+    AcceptedBy  :string
+
 }
 
 enum role{
-    Admin ,
-    User ,
+    Admin,
+    User,
 }
 
 interface IPDto {
-
     name : string,
     password : string
 
 }
+
 interface IPRegister{
-    name: string ,
+    name: string,
     password : string,
     role : string
 }
 
 interface AttendeeDto {
-    id : number ,
+    id : number,
     eventsid? : number,
     name : string,
-    email : string ,
-    registerdAt? : Date ,
+    email : string,
+    registerdAt? : Date,
 }
 
 interface VenueDto{
@@ -49,5 +70,9 @@ interface EventAttendeeDto {
     registeredAt? : Date 
 }
 
+interface inviteNewUserDto{
+    from : string,
+    to : string
+}
 
-export {EventAttendeeDto,EventDto,VenueDto,AttendeeDto , role,IPDto, IPRegister}
+export {EventAttendeeDto,EventDto,VenueDto,AttendeeDto,status,role,IPDto,IPRegister,inviteNewUserDto,EventCreatedByUserDto,AdminConformationDto}

@@ -14,7 +14,7 @@ CREATE TABLE `Event` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
-    `data` DATETIME(3) NOT NULL,
+    `date` DATETIME(3) NOT NULL,
     `venueid` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -49,6 +49,25 @@ CREATE TABLE `Eventattendee` (
     `eventid` INTEGER NOT NULL,
     `attendeeid` INTEGER NOT NULL,
     `registeredAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    UNIQUE INDEX `Eventattendee_eventid_attendeeid_key`(`eventid`, `attendeeid`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `InviteDetails` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `from` VARCHAR(191) NOT NULL,
+    `to` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `AdminConfirmation` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `status` ENUM('Accept', 'Reject') NOT NULL,
+    `acceptedby` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

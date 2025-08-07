@@ -131,7 +131,7 @@ exports.Prisma.EventScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  data: 'data',
+  date: 'date',
   venueid: 'venueid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -156,6 +156,18 @@ exports.Prisma.EventattendeeScalarFieldEnum = {
   eventid: 'eventid',
   attendeeid: 'attendeeid',
   registeredAt: 'registeredAt'
+};
+
+exports.Prisma.InviteDetailsScalarFieldEnum = {
+  id: 'id',
+  from: 'from',
+  to: 'to'
+};
+
+exports.Prisma.AdminConfirmationScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  acceptedby: 'acceptedby'
 };
 
 exports.Prisma.SortOrder = {
@@ -187,9 +199,23 @@ exports.Prisma.VenueOrderByRelevanceFieldEnum = {
   venuename: 'venuename',
   address: 'address'
 };
+
+exports.Prisma.InviteDetailsOrderByRelevanceFieldEnum = {
+  from: 'from',
+  to: 'to'
+};
+
+exports.Prisma.AdminConfirmationOrderByRelevanceFieldEnum = {
+  acceptedby: 'acceptedby'
+};
 exports.Role = exports.$Enums.Role = {
   Admin: 'Admin',
   User: 'User'
+};
+
+exports.Status = exports.$Enums.Status = {
+  Accept: 'Accept',
+  Reject: 'Reject'
 };
 
 exports.Prisma.ModelName = {
@@ -197,7 +223,9 @@ exports.Prisma.ModelName = {
   Event: 'Event',
   Attendee: 'Attendee',
   Venue: 'Venue',
-  Eventattendee: 'Eventattendee'
+  Eventattendee: 'Eventattendee',
+  InviteDetails: 'InviteDetails',
+  AdminConfirmation: 'AdminConfirmation'
 };
 
 /**
